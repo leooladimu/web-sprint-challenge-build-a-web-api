@@ -56,11 +56,11 @@ router.put('/:id', (req, res) => {
 	const changes = req.body;
 	const { id } = req.params;
 	Project.update(id, changes)
-		.then(project => {
-			if (!project.body.name || !project.body.description) {
-				res.status(400).json({ message: 'sorry'});
+		.then(action => {
+			if (!action.body.name || !action.body.description) {
+				res.status(400).json({ message: 'nope'});
 			} else {
-				res.status(200).json(project);
+				res.status(200).json(action);
 			}
 		})
 		.catch(error => {
@@ -68,7 +68,6 @@ router.put('/:id', (req, res) => {
 			});
 		});
 });
-
 		
 router.delete('/:id', (req, res) => {	
 	const id = req.params.id;	
