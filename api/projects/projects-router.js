@@ -53,9 +53,9 @@ router.post('/', (req, res) => {
 	  });	
 });	
 
-router.put('/:id', validateProject, validateId(req, res) => {
+// router.put('/:id', validateProject, validateId(req, res) => {
   
-});
+// });
 		
 router.delete('/:id', (req, res) => {	
 	const id = req.params.id;	
