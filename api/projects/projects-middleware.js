@@ -12,7 +12,7 @@ async function validateId(req, res, next) {
 	  } else {
 	    next({
       	status: 404,
-	      message: 'yer trippin'
+	      message: 'ID not valid'
 	    });
 	  }
 	} catch (err) {
@@ -36,6 +36,6 @@ async function validateProject(req, res, next) {
 	    req.completed = completed;
 	    next();
 	  }
-}
+	}
 	
-module.exports = { validateId, validateProject };
+	module.exports = { validateId, validateProject };

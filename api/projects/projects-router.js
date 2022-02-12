@@ -1,8 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 // Write your "projects" router here!
-const express = require('express');			
-		const router = express.Router();
-		const Project = require('./projects-model.js');
+const express = require('express');		
+const router = express.Router();
+const Project = require('./projects-model');
+const { validateProject, validateId } = require('./projects-middleware');
+const req = require('express/lib/request');
 		
 router.get('/', (req, res) => {	
 	Project.get(res.body)	
@@ -50,22 +52,10 @@ router.post('/', (req, res) => {
 	    res.status(400).json({ message: error.message });	
 	  });	
 });	
-		
-router.put('/:id', (req, res) => {	
-	const changes = req.body;	
-	const { id } = req.params;	
-	Project.update(id, changes)	
-	  .then((project) => {	
-	    if (!project.body.name || !project.body.description) {	
-	      return res.status(400).json({ message: 'sorry'});	
-	    } else {	
-	      res.status(200).json(project);	
-	    }	
-    })	
-	  .catch(error => {	
-	    res.status(400).json({ message: error.message });	
-	  });	
-});	
+
+router.put('/:id', validateProject, validateId(req, res) => {
+  
+});
 		
 router.delete('/:id', (req, res) => {	
 	const id = req.params.id;	
